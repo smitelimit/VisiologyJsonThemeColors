@@ -12,17 +12,19 @@ frame = Frame(root)
 # frame.grid(sticky="W", column=0, row=0)
 frame.pack(anchor=NW, side=LEFT)
 
-style = ["#34A2FE", "#1E2735"]
-lab = Label(frame, text="Заголовок", background="#34A2FE", fg="#FFFFFF", font=("Arial", 21, "bold"), width=13)
+titlecol = "#34A2FE"
+fillcol = "#1E2735"
+lab = Label(frame, text="Заголовок", background=titlecol, fg="#FFFFFF", font=("Arial", 21, "bold"), width=13)
 lab.pack()
 # lab.grid(column=0, row=1)
-lab2 = Label(frame, text="Текст", background="#1E2735", fg="#FFFFFF", font=("Arial", 21, "bold"), width=13, height=5)
+lab2 = Label(frame, text="Текст", background=fillcol, fg="#FFFFFF", font=("Arial", 21, "bold"), width=13, height=5)
 # lab.grid(column=0, row=2)
 lab2.pack()
 
 
 def colorbg():
-    lab.config(bg=colorchooser.askcolor()[1])
+    titlecol = colorchooser.askcolor()[1]
+    lab.config(bg=titlecol)
     # my_label = tk.Label(root, text=my_color).pack(pady=10)
     # my_label2 = tk.Label(root, text="You picked a color!", font=("Helvetica", 32), bg=my_color).pack()
     # lab.config(bg=my_color)
@@ -31,7 +33,8 @@ def colorfg():
     lab.config(fg=colorchooser.askcolor()[1])
 
 def colorbg2():
-    lab2.config(bg=colorchooser.askcolor()[1])
+    fillcol = colorchooser.askcolor()[1]
+    lab2.config(bg=fillcol)
 
 
 frame2 = Frame(root)
@@ -44,4 +47,3 @@ my_button4 = Button(root, text="Создать тему", command=colorbg2).plac
 
 
 root.mainloop()
-#test
