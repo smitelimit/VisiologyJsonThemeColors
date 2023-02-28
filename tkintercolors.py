@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import colorchooser
-import json, themeform as tf
+import json, themeform as tf, os
 # f = open('theme.json', encoding="utf-8")
 # data = json.load(f)
 
@@ -24,6 +24,7 @@ lab2.pack()
 
 
 def colorbg():
+    infomsg.set("")
     entry = entrybg.get()
     global titlecol
     if entry:
@@ -45,6 +46,7 @@ def colorfg():
 
 
 def colorbg2():
+    infomsg.set("")
     entry = entrybg2.get()
     global fillcol
     if entry:
@@ -63,6 +65,10 @@ def colorbg2():
 
 def createtheme():
     tf.savetheme(tf.jsonload(), [titlecol, fillcol, graphscol], entrytheme.get())
+    path = ""
+    try: path = os.path.dirname(os.path.realpath(__file__))
+    except: pass
+    infomsg.set(f"Тема сохранена {path}")
 
 frame2 = Frame(root)
 # frame2.grid(sticky="N", column=1, row=0)
@@ -80,5 +86,9 @@ entrytheme.place(rely=1.0, relx=1.0, x=0, y=0, anchor=SE)
 entrytheme.insert(0, "Название_темы")
 buttheme = Button(root, text="Создать тему", command=createtheme).place(rely=1.0, relx=1.0, x=0, y=0, anchor=SE)
 
+infomsg = StringVar()
+infolabel = Label(foreground="green", textvariable=infomsg, wraplength=250)
+infolabel.place(rely=0.9, relx=1.0, x=0, y=0, anchor=SE)
+# infolabel.pack(padx=5, pady=5, anchor=SE)
 
 root.mainloop()
