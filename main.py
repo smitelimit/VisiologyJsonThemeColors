@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import colorchooser
-import json, themeform as tf, os
+import json, themeform as tf, os, subprocess
+
 # f = open('theme.json', encoding="utf-8")
 # data = json.load(f)
 
@@ -28,7 +29,7 @@ def colorbg():
     entry = entrybg.get()
     global titlecol
     if entry:
-        if len(entry) > 6:
+        if len(entry) > 7:
             if entry.startswith("#"):
                 entry = entry[3:]
             else:
@@ -50,7 +51,7 @@ def colorbg2():
     entry = entrybg2.get()
     global fillcol
     if entry:
-        if len(entry) > 6:
+        if len(entry) > 7:
             if entry.startswith("#"):
                 entry = entry[3:]
             else:
@@ -64,11 +65,16 @@ def colorbg2():
 
 
 def createtheme():
-    tf.savetheme(tf.jsonload(), [titlecol, fillcol, graphscol], entrytheme.get())
+    name = entrytheme.get()
+    tf.savetheme(tf.jsonload(), [titlecol, fillcol, graphscol], name)
     path = ""
     try: path = os.path.dirname(os.path.realpath(__file__))
     except: pass
-    infomsg.set(f"Тема сохранена {path}")
+    infomsg.set(f"Тема сохранена")
+    try:
+        # subprocess.Popen(f'explorer /select,"{path}"')
+        subprocess.Popen(f'explorer /select,"{name}.json"')
+    except: pass
 
 frame2 = Frame(root)
 # frame2.grid(sticky="N", column=1, row=0)
